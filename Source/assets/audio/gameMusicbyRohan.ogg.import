@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gameMusicbyRohan.ogg-398179d8f2d8df6cb81162ea476a6673.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/gameMusicbyRohan.ogg"
+dest_files=[ "res://.import/gameMusicbyRohan.ogg-398179d8f2d8df6cb81162ea476a6673.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
