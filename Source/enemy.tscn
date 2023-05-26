@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/art/WhatsApp_Image_2021-03-29_at_11.52.08-removebg-preview.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/WhatsApp_Image_2021-03-30_at_11.39.38-removebg-preview.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/expl1.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/expl3.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/expl4.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/expl2.png" type="Texture" id=6]
+[ext_resource path="res://enemy.gd" type="Script" id=7]
+
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "Fly",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "Explosion",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 15.0214
+height = 47.541
+
+[node name="Mob" type="RigidBody2D" groups=[
+"mobs",
+]]
+collision_layer = 9
+collision_mask = 0
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.629957, 0 )
+scale = Vector2( 0.254, 0.25 )
+frames = SubResource( 1 )
+animation = "Fly"
+speed_scale = 3.0
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.1821, -2.07399 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 14.7762, 0.591042 )
+[connection signal="body_entered" from="." to="." method="_on_Mob_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

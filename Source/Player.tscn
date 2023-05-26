@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/art/WhatsApp_Image_2021-03-28_at_12.13.45-removebg-preview.png" type="Texture" id=1]
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/expl1.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/expl3.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/expl4.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/expl2.png" type="Texture" id=6]
+
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "Ship",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "PlayerExplosion",
+"speed": 5.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1.49012e-08 )
+shape = SubResource( 1 )
+
+[node name="PlayerAnimation" type="AnimatedSprite" parent="."]
+position = Vector2( 0.629669, 1.48532 )
+scale = Vector2( 0.0835098, 0.0804434 )
+frames = SubResource( 2 )
+animation = "Ship"
+playing = true

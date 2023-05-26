@@ -1,0 +1,230 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://MobSwapLocation.gd" type="Script" id=2]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Bullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/audio/Explosion.wav" type="AudioStream" id=7]
+[ext_resource path="res://asteroids.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/art/newHomeScreen.jpg" type="Texture" id=9]
+[ext_resource path="res://assets/audio/gameMusicbyRohan.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/art/gameOverScreen.jpg" type="Texture" id=11]
+[ext_resource path="res://assets/art/cooldown/specialIconMonochrome.jpg" type="Texture" id=12]
+[ext_resource path="res://assets/art/cooldown/specialAttack.png" type="Texture" id=13]
+[ext_resource path="res://assets/art/cooldown/specialAttack6.jpg" type="Texture" id=14]
+[ext_resource path="res://assets/art/cooldown/specialAttack5.jpg" type="Texture" id=15]
+[ext_resource path="res://assets/art/cooldown/specialAttack4.jpg" type="Texture" id=16]
+[ext_resource path="res://assets/art/cooldown/specialAttack3.png" type="Texture" id=17]
+[ext_resource path="res://assets/art/cooldown/specialAttack7.png" type="Texture" id=18]
+[ext_resource path="res://assets/art/cooldown/specialAttack2.png" type="Texture" id=19]
+[ext_resource path="res://assets/art/infoScreen.jpg" type="Texture" id=20]
+[ext_resource path="res://assets/audio/gameOver.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/audio/laser.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/art/badger.jpg" type="Texture" id=23]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -4.94515, -6.83172, 0, 0, 0, 0, 1276.18, -5.3181, 0, 0, 0, 0, 1275.43, 729.028, 0, 0, 0, 0, -5.05427, 727.019, 0, 0, 0, 0, -4.08099, 283.816, 0, 0, 0, 0, -1.85263, 18.7807, 0, 0, 0, 0, -2.9668, -1.5199 )
+}
+
+[sub_resource type="GDScript" id=2]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 18 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "cooldown",
+"speed": 5.0
+} ]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+Mob = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.6727
+margin_top = -2.06779
+margin_right = -2.67273
+margin_bottom = -2.06781
+color = Color( 0.0823529, 0.172549, 0.290196, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 635.201, 571.553 )
+rotation = -1.5708
+collision_layer = 9
+collision/safe_margin = 0.001
+
+[node name="DeathExplosionSound" type="AudioStreamPlayer" parent="."]
+pause_mode = 1
+stream = ExtResource( 7 )
+volume_db = -7.996
+pitch_scale = 1.08
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 9.82687, -2.4093 )
+
+[node name="MobPath" type="Path2D" parent="."]
+position = Vector2( -0.29398, 4.73153 )
+scale = Vector2( 1.00743, 0.995257 )
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2( -4.94515, -6.83172 )
+rotation = 0.00118144
+script = ExtResource( 2 )
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+
+[node name="BulletNode" parent="." instance=ExtResource( 6 )]
+position = Vector2( -2.6727, -21.3816 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 1209.74
+margin_top = 7.13391
+margin_right = 1273.74
+margin_bottom = 70.1339
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeDisplay" type="Label" parent="Panel"]
+margin_right = 61.0
+margin_bottom = 62.0
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="asteroids" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1051.88, 70.1339 )
+
+[node name="asteroids2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 110.013, 150.262 )
+
+[node name="asteroids3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 616.302, 7.13391 )
+
+[node name="asteroids4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1051.88, 478.36 )
+
+[node name="asteroids5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 149.611, 520 )
+
+[node name="titleCard" type="TextureRect" parent="."]
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 1598.0
+margin_bottom = 898.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="titleCard"]
+margin_left = 1083.0
+margin_top = 698.0
+margin_right = 1276.0
+margin_bottom = 712.0
+text = "A Badger Studios© production"
+
+[node name="TextureRect" type="TextureRect" parent="titleCard"]
+margin_left = 9.0
+margin_top = 618.0
+margin_right = 97.0
+margin_bottom = 710.0
+texture = ExtResource( 23 )
+
+[node name="roundLabel" type="Label" parent="."]
+margin_left = 581.0
+margin_top = 421.0
+margin_right = 703.0
+margin_bottom = 469.0
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -13.255
+
+[node name="gameOverBackground" type="ColorRect" parent="."]
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 1354.0
+margin_bottom = 782.0
+color = Color( 0.239216, 0.0470588, 0.0470588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameOverImage" type="TextureRect" parent="gameOverBackground"]
+margin_top = 9.0
+margin_right = 1600.0
+margin_bottom = 908.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="endScore" type="Label" parent="gameOverBackground"]
+margin_left = 777.0
+margin_top = 246.0
+margin_right = 984.0
+margin_bottom = 361.0
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cooldown" type="AnimatedSprite" parent="."]
+position = Vector2( 1209.74, 659.564 )
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 3 )
+animation = "empty"
+speed_scale = 0.2
+playing = true
+
+[node name="infoScreen" type="TextureRect" parent="."]
+margin_left = -3.78198
+margin_top = -2.0
+margin_right = 1596.22
+margin_bottom = 898.0
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameOverTrack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+
+[node name="laser" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -15.0
+pitch_scale = 5.0
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="timeout" from="Timer" to="." method="TimerTimeout"]

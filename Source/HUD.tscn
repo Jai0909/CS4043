@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/art/startbutton.png" type="Texture" id=1]
+[ext_resource path="res://HUD.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/infobutton.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/backbutton.png" type="Texture" id=4]
+
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="StartButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 202.523
+margin_top = -299.699
+margin_right = 566.523
+margin_bottom = -200.699
+icon = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InfoButton" type="Button" parent="."]
+margin_left = 842.909
+margin_top = 541.303
+margin_right = 1206.91
+margin_bottom = 640.303
+icon = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="backButton" type="Button" parent="."]
+margin_left = 868.308
+margin_top = 576.226
+margin_right = 1232.31
+margin_bottom = 675.226
+icon = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="StartButton" to="." method="_on_StartButton_button_down"]
+[connection signal="button_down" from="InfoButton" to="." method="_on_InfoButton_button_down"]
+[connection signal="button_down" from="backButton" to="." method="_on_backButton_button_down"]
